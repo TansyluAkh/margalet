@@ -77,7 +77,7 @@ def callback_inline(call):
 @server.route('/' + config.usr, methods=['POST'])
 def getMessage():
     print(request)
-    update = telebot.types.Update.de_json(request)
+    update = telebot.types.Update.de_json(request.data.decode('utf-8'))
     bot.process_new_updates([update])
     return "!", 200
 
