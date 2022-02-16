@@ -7,7 +7,7 @@ b4 = types.InlineKeyboardButton(text="⬜", callback_data="4")
 b5 = types.InlineKeyboardButton(text="⬜", callback_data="5")
 b6 = types.InlineKeyboardButton(text="✅", callback_data="16")
 letters = ["⬜", "⬜","⬜","⬜","⬜","✅" ]
-today = 'гаилә'
+today = 'тавыш'
 rows = 1
 word = ''
 open = False
