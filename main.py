@@ -16,6 +16,7 @@ def convert(txt):
         return(int(txt)-1)
 @bot.message_handler(commands=['start'])
 def start(m):
+    config.open = False
     bot.send_message(m.chat.id, 'Нажмите на серую ячейку, чтобы ввести букву', reply_markup = initmarkup)
     config.gamekey = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
 
