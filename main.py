@@ -1,6 +1,13 @@
-import telebot, db as dbcreator, config
-bot = telebot.TeleBot('5280120471:AAGBHIfqpnPjhl79GUv19v272s1_MGHBho0', threaded=False)
+import os
+
+import telebot, config
+from flask import Flask, request
+
+bot = telebot.TeleBot(config.usr, threaded=False)
 initmarkup =  config.array(change='')[0]
+server = Flask(__name__)
+
+
 def convert(txt):
     if len(txt) >1:
         i, x = int(txt[0]), int(txt[1])
@@ -67,7 +74,19 @@ def callback_inline(call):
             bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=config.alifba())
 
         return
+@server.route('/' + config.usr, methods=['POST'])
+def getMessage():
+    json_string = request.decode('utf-8')
+    update = telebot.types.Update.de_json(json_string)
+    bot.process_new_updates([update])
+    return "!", 200
+
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://kelimelle.herokuapp.com/' + config.usr)
+    return "!", 200
 
 
-if __name__ == '__main__':
-    bot.polling(none_stop=True)
+if __name__ == "__main__":
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
