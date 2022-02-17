@@ -54,7 +54,6 @@ def alifba():
     s = []
     keyboard1.add(*btns)
     for i in alifbas:
-        s.append(i)
         s.append(types.InlineKeyboardButton(text=i, callback_data=i))
         if len(s) == 8:
             keyboard1.row(*s)
