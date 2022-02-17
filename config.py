@@ -61,5 +61,3 @@ def alifba():
             s = []
     keyboard1.row(*s)
     return keyboard1
-
-alifba()
