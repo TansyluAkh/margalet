@@ -55,10 +55,10 @@ def alifba():
     counter = 0
     keyboard1.add(*btns)
     for i in alifbas:
-        counter += 1
         s.append(types.InlineKeyboardButton(text=i, callback_data=i))
         if counter == 8:
             keyboard1.row(*s)
             counter = 0
             s = []
+        counter += 1
     return keyboard1
