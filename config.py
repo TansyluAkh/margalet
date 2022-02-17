@@ -52,13 +52,14 @@ def showres(linenum, res, correct):
 def alifba():
     keyboard1 = types.InlineKeyboardMarkup(row_width=6)
     s = []
-    counter = 0
     keyboard1.add(*btns)
     for i in alifbas:
+        s.append(i)
         s.append(types.InlineKeyboardButton(text=i, callback_data=i))
-        if counter == 8:
+        if len(s) == 8:
             keyboard1.row(*s)
-            counter = 0
             s = []
-        counter += 1
+    keyboard1.row(*s)
     return keyboard1
+
+alifba()
