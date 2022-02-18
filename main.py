@@ -1,6 +1,6 @@
 import os
 
-import telebot, config
+import telebot, config, database
 from flask import Flask, request
 
 bot = telebot.TeleBot(config.usr, threaded=False)
@@ -18,12 +18,13 @@ def convert(txt):
 
 @bot.message_handler(commands=['start'])
 def start(m):
-    config.open = False
-    bot.send_message(m.chat.id, 'Нажмите на серую ячейку, чтобы ввести букву', reply_markup = initmarkup)
-    config.gamekey = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
-    config.btns = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
-    config.letters = ["⬜", "⬜","⬜","⬜","⬜","✅" ]
-    config.pos = 0
+    open = False
+    gamekey = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
+    btns = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
+    letters = ["⬜", "⬜","⬜","⬜","⬜","✅" ]
+    pos = 0
+    database.new_user(m.chat.id, letters, open, pos, gamekey, btns)
+    bot.send_message(m.chat.id, 'Нажмите на серую ячейку, чтобы ввести букву', reply_markup=initmarkup)
 
 
 @bot.message_handler(content_types=['text'])

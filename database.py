@@ -19,13 +19,13 @@ con = psycopg2.connect(
             )
 
 
-def new_user(name, chatid, score):
+def new_user(chatid, letters, open, pos, gamekey, btns):
     print('new')
     cur = con.cursor()
-    s = cur.execute('SELECT id FROM users WHERE id={}'.format(str(chatid)))
+    s = cur.execute('SELECT id FROM players WHERE users={}'.format(str(chatid)))
     print(s)
     if s:
-        cur.execute("INSERT INTO users (name, id, scores) VALUES (%s, %s, %s)", (name, chatid, score))
+        cur.execute("INSERT INTO players (users, letters, open, pos, gamekey, btns) VALUES (%s, %s, %s)", (chatid, letters, open, pos, gamekey, btns))
         con.commit()
     cur.close()
     return 'done'
