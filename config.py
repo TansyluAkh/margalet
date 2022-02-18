@@ -24,8 +24,10 @@ def array(change='', txt='', callback=''):
         print(ind)
         if ind!=4 and '⬜' in letters:
             s = letters[ind:].index('⬜')
-            btns[change+s+1] = types.InlineKeyboardButton(text='_', callback_data=str(callback+1))
-
+            ps = change+s+1
+            btns[ps] = types.InlineKeyboardButton(text='_', callback_data=str(callback+1))
+        else:
+            ps += 1
         letters[ind] = txt
     keyboard.row(*btns)
     return(keyboard, btns, ps)
