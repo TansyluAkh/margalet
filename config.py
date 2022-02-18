@@ -15,18 +15,20 @@ pos = 0
 gamekey = ''
 btns = [b1, b2, b3, b4, b5, b6,]
 def array(change='', txt='', callback=''):
+    ps = change
     print('change:', change, 'txt:', txt, 'callb:', callback)
     keyboard = types.InlineKeyboardMarkup(row_width=6)
     if change != '':
         ind = change - (change // 6) * 6
         btns[change] = types.InlineKeyboardButton(text=txt, callback_data=str(callback))
         print(ind)
-        if ind!=4:
-            if letters[ind+1] == "⬜":
-                btns[change+1] = types.InlineKeyboardButton(text='_', callback_data=str(callback+1))
+        if ind!=4 and '⬜' in letters:
+            s = letters[ind:].index('⬜')
+            btns[change+s+1] = types.InlineKeyboardButton(text='_', callback_data=str(callback+1))
+
         letters[ind] = txt
     keyboard.row(*btns)
-    return(keyboard, btns)
+    return(keyboard, btns, ps)
 
 
 def showres(linenum, res, correct):

@@ -74,8 +74,6 @@ def callback_inline(call):
             newkey = config.array(config.pos, call.data, config.pos+1)
             config.gamekey = newkey[1]
             ind = config.pos - (config.pos // 6) * 6
-            if ind!=4:
-                config.pos += 1
             bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=config.alifba())
 
         return
