@@ -64,7 +64,6 @@ def callback_inline(call):
                     config.open = False
                     config.pos = convert(str(int(call.data[0])+1)+'1')
                     print(config.pos, 'POS')
-                    config.rows += 1
                     reset = config.showres(int(call.data[0]), res, correct)
                     config.gamekey = reset[1]
                     config.letters = reset[2]
