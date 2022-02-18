@@ -50,16 +50,16 @@ def get_user(chatid):
     return arr
 
 
-cursor = con.cursor()
-# SQL query to create a new table
-create_table_query = '''CREATE TABLE players
-      (id INT PRIMARY KEY NOT NULL,
-      users TEXT,
-      letters TEXT,
-      open TEXT,
-      pos INT,
-      gamekey  TEXT,
-      btns TEXT); '''
-# Execute a command: this creates a new table
-cursor.execute(create_table_query)
-con.commit()
+# cursor = con.cursor()
+# # SQL query to create a new table
+# create_table_query = '''CREATE TABLE players
+#       (id INT PRIMARY KEY NOT NULL,
+#       users TEXT,
+#       letters TEXT,
+#       open TEXT,
+#       pos INT,
+#       gamekey  TEXT,
+#       btns TEXT); '''
+# # Execute a command: this creates a new table
+# cursor.execute(create_table_query)
+# con.commit()
