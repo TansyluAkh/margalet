@@ -49,7 +49,7 @@ def get_user(chatid):
     return arr
 
 #
-# cursor = con.cursor()
+cursor = con.cursor()
 # #QL query to create a new table
 # create_table_query = '''CREATE TABLE players
 #       (id INT PRIMARY KEY NOT NULL,
@@ -71,5 +71,8 @@ def get_user(chatid):
 # btns = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
 # letters = ["⬜", "⬜","⬜","⬜","⬜","✅" ]
 # pos = 0
-# new_user(505303703, letters, open, pos, letters, letters, letters,  letters , letters,)
-# get_user(505303703)
+# new_user(50530370, letters, open, pos, letters, letters, letters,  letters , letters,)
+# get_user(50530370)
+#
+# cursor.execute("ROLLBACK")
+# con.commit()
