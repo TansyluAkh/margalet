@@ -22,8 +22,9 @@ def start(m):
     gamekey = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
     btns = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
     letters = ["⬜", "⬜","⬜","⬜","⬜","✅" ]
+    r1, r2, r3, r4, r5 = letters, letters, letters, letters, letters
     pos = 0
-    database.new_user(m.chat.id, letters, open, pos, gamekey, btns)
+    database.new_user(m.chat.id, letters, open, pos, r1, r2, r3, r4, r5)
     bot.send_message(m.chat.id, 'Нажмите на серую ячейку, чтобы ввести букву', reply_markup=initmarkup)
 
 
