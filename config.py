@@ -8,9 +8,8 @@ b5 = types.InlineKeyboardButton(text="⬜", callback_data="5")
 b6 = types.InlineKeyboardButton(text="✅", callback_data="16")
 letters = ["⬜", "⬜","⬜","⬜","⬜","✅" ]
 usr = '5280120471:AAGBHIfqpnPjhl79GUv19v272s1_MGHBho0'
+url = 'postgresql://wtrylknvuugirf:8cab4a8bb5577d2bdc086ac1781163caf6886913f9176c901e250b8762785568@ec2-52-207-74-100.compute-1.amazonaws.com:5432/daqboea7knq0i0'
 today = 'тавыш'
-rows = 1
-word = ''
 open = False
 pos = 0
 gamekey = ''

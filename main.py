@@ -14,16 +14,21 @@ def convert(txt):
         return(6*(i-1) +(x-1))
     else:
         return(int(txt)-1)
+
+
 @bot.message_handler(commands=['start'])
 def start(m):
     config.open = False
     bot.send_message(m.chat.id, 'Нажмите на серую ячейку, чтобы ввести букву', reply_markup = initmarkup)
     config.gamekey = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
+    config.btns = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
+    config.letters = ["⬜", "⬜","⬜","⬜","⬜","✅" ]
+    config.pos = 0
+
 
 @bot.message_handler(content_types=['text'])
 def save(m):
-    config.word = m.text
-    return
+    return m
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -75,12 +80,15 @@ def callback_inline(call):
             bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=config.alifba())
 
         return
+
+
 @server.route('/' + config.usr, methods=['POST'])
 def getMessage():
     print(request)
     update = telebot.types.Update.de_json(request.data.decode('utf-8'))
     bot.process_new_updates([update])
     return "!", 200
+
 
 @server.route("/")
 def webhook():
