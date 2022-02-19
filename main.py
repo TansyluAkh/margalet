@@ -3,8 +3,8 @@ import os
 import telebot,config, database
 from flask import Flask, request
 
-bot = telebot.TeleBot(info.usr, threaded=False)
-initmarkup =  info.array(change='')[0]
+bot = telebot.TeleBot(config.usr, threaded=False)
+initmarkup =  config.array(change='')[0]
 server = Flask(__name__)
 
 
@@ -83,7 +83,7 @@ def callback_inline(call):
         return
 
 
-@server.route('/' + info.usr, methods=['POST'])
+@server.route('/' + config.usr, methods=['POST'])
 def getMessage():
     print(request)
     update = telebot.types.Update.de_json(request.data.decode('utf-8'))
@@ -94,7 +94,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://kelimelle.herokuapp.com/' + info.usr)
+    bot.set_webhook(url='https://kelimelle.herokuapp.com/' + config.usr)
     return "!", 200
 
 
