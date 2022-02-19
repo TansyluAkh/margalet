@@ -37,7 +37,9 @@ def new_user(chatid, letters, open, pos, r1, r2, r3, r4, r5):
     print('new')
     cur = con.cursor()
     s = cur.execute('SELECT 1 FROM players WHERE id={}'.format(str(chatid)))
-    if s == 1:
+    print(s)
+    if s == None:
+        print('INSERT')
         cur.execute("INSERT INTO players (id, users, letters,\
          open, pos, r1, r2, r3, r4, r5) VALUES (%s, %s, %s, %s, \
          %s, %s, %s, %s, %s, %s)", (chatid, chatid,letters, open, pos, r1, r2, r3, r4, r5))
@@ -88,12 +90,12 @@ cursor = con.cursor()
 # cursor.execute(create_table_query)
 # con.commit()
 
-# open = False
-# gamekey = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
-# btns = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
-# letters = ["ppppp", "⬜","⬜","⬜","⬜","✅" ]
-# pos = 0
-# new_user(50530370, letters, open, pos, letters, letters, letters,  letters, letters)
+open = False
+gamekey = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
+btns = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
+letters = ["ppppp", "⬜","⬜","⬜","⬜","✅" ]
+pos = 0
+new_user(505303780, letters, open, pos, letters, letters, letters,  letters, letters)
 # s = get_user(50530370)
 # print(s.id, s.letters, s.pos, s.r3)
 
