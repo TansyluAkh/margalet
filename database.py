@@ -65,6 +65,8 @@ def get_user(chatid):
     print(arr)
     if arr != None:
         info = User( *list(arr))
+    else:
+        info = []
     cur.close()
     return info
 
