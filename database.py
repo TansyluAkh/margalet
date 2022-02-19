@@ -62,7 +62,9 @@ def get_user(chatid):
     cur = con.cursor()
     cur.execute('SELECT user, letters, open, pos, r1, r2, r3, r4, r5 FROM players WHERE id={}'.format(str(chatid)))
     arr = cur.fetchone()
-    info = User( *list(arr))
+    print(arr)
+    if arr != None:
+        info = User( *list(arr))
     cur.close()
     return info
 
@@ -92,6 +94,6 @@ cursor = con.cursor()
 # new_user(50530370, letters, open, pos, letters, letters, letters,  letters, letters)
 # s = get_user(50530370)
 # print(s.id, s.letters, s.pos, s.r3)
-#
+
 # cursor.execute("ROLLBACK")
 # con.commit()
