@@ -90,12 +90,12 @@ cursor = con.cursor()
 # cursor.execute(create_table_query)
 # con.commit()
 
-open = False
-gamekey = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
-btns = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
-letters = ["ppppp", "⬜","⬜","⬜","⬜","✅" ]
-pos = 0
-new_user(505303780, letters, open, pos, letters, letters, letters,  letters, letters)
+# open = False
+# gamekey = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
+# btns = [config.b1, config.b2, config.b3, config.b4, config.b5, config.b6]
+# letters = ["ppppp", "⬜","⬜","⬜","⬜","✅" ]
+# pos = 0
+#new_user(505303780, letters, open, pos, letters, letters, letters,  letters, letters)
 # s = get_user(50530370)
 # print(s.id, s.letters, s.pos, s.r3)
 
