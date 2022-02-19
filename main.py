@@ -37,7 +37,7 @@ def save(m):
 def callback_inline(call):
     if call.message:
         info = database.get_user(call.message.chat.id)
-        print(call.message)
+        print(info)
         print(call.data, call.message.chat.id,' call.data')
         if call.data.isdigit():
             if int(call.data) in [2, 3, 4, 5,  22, 23, 24, 25, 32, 33, 34, 35,42, 43, 44, 45, 52, 53, 54, 55,1,21, 31, 41, 51]:
