@@ -1,19 +1,11 @@
 import os
 
-import telebot, config, database
+import telebot,config, database
 from flask import Flask, request
 
-bot = telebot.TeleBot(config.usr, threaded=False)
-initmarkup =  config.array(change='')[0]
+bot = telebot.TeleBot(info.usr, threaded=False)
+initmarkup =  info.array(change='')[0]
 server = Flask(__name__)
-
-
-def convert(txt):
-    if len(txt) >1:
-        i, x = int(txt[0]), int(txt[1])
-        return(6*(i-1) +(x-1))
-    else:
-        return(int(txt)-1)
 
 
 @bot.message_handler(commands=['start'])
@@ -27,6 +19,14 @@ def start(m):
     database.new_user(m.chat.id, letters, open, pos, r1, r2, r3, r4, r5)
     bot.send_message(m.chat.id, 'Нажмите на серую ячейку, чтобы ввести букву', reply_markup=initmarkup)
 
+def convert(txt):
+    if len(txt) >1:
+        i, x = int(txt[0]), int(txt[1])
+        return(6*(i-1) +(x-1))
+    else:
+        return(int(txt)-1)
+
+
 
 @bot.message_handler(content_types=['text'])
 def save(m):
@@ -36,53 +36,54 @@ def save(m):
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     if call.message:
+        info = database.get_user(call.message.chat.id)
         print(call.message)
         print(call.data, call.message.chat.id,' call.data')
         if call.data.isdigit():
             if int(call.data) in [2, 3, 4, 5,  22, 23, 24, 25, 32, 33, 34, 35,42, 43, 44, 45, 52, 53, 54, 55,1,21, 31, 41, 51]:
-                if config.open == False:
-                    config.pos = convert(call.data)
+                if info.open == False:
+                    info.pos = convert(call.data)
                     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id,
-                                                  reply_markup=config.alifba())
-                    config.open = True
-                config.pos = convert(call.data)
+                                                  reply_markup=info.alifba())
+                    info.open = True
+                info.pos = convert(call.data)
 
             elif call.data in ['16', '26', '36', '46', '56']:
                 res, correct = [], {}
                 flag = True
                 for l in range(5):
-                    if config.letters[l].lower() == config.today[l]:
-                       res.append(config.letters[l]+'🟩')
-                       correct[str(l)] = config.letters[l]
+                    if info.letters[l].lower() == info.today[l]:
+                       res.append(info.letters[l]+'🟩')
+                       correct[str(l)] = info.letters[l]
                     else:
                         flag = False
-                        if config.letters[l].lower() in config.today:
-                            res.append(config.letters[l]+'🟨')
+                        if info.letters[l].lower() in info.today:
+                            res.append(info.letters[l]+'🟨')
                         else:
-                            res.append(config.letters[l]+'⬛')
+                            res.append(info.letters[l]+'⬛')
                 if flag:
-                    bot.send_message(call.message.chat.id, 'Вы отгадали слово дня: '+'\n'+config.today)
+                    bot.send_message(call.message.chat.id, 'Вы отгадали слово дня: '+'\n'+info.today)
                 else:
-                    config.open = False
-                    config.pos = convert(str(int(call.data[0])+1)+'1')
-                    print(config.pos, 'POS')
-                    reset = config.showres(int(call.data[0]), res, correct)
-                    config.gamekey = reset[1]
-                    config.letters = reset[2]
+                    info.open = False
+                    info.pos = convert(str(int(call.data[0])+1)+'1')
+                    print(info.pos, 'POS')
+                    reset = info.showres(int(call.data[0]), res, correct)
+                    info.gamekey = reset[1]
+                    info.letters = reset[2]
                     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id,
                                                   reply_markup=reset[0])
-                    print(config.letters)
-        if call.data in config.alifbas:
-            newkey = config.array(config.pos, call.data, config.pos+1)
-            config.gamekey = newkey[1]
-            config.pos = newkey[2]
-            ind = config.pos - (config.pos // 6) * 6
-            bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=config.alifba())
+                    print(info.letters)
+        if call.data in info.alifbas:
+            newkey = info.array(info.pos, call.data, info.pos+1)
+            info.gamekey = newkey[1]
+            info.pos = newkey[2]
+            ind = info.pos - (info.pos // 6) * 6
+            bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=info.alifba())
 
         return
 
 
-@server.route('/' + config.usr, methods=['POST'])
+@server.route('/' + info.usr, methods=['POST'])
 def getMessage():
     print(request)
     update = telebot.types.Update.de_json(request.data.decode('utf-8'))
@@ -93,7 +94,7 @@ def getMessage():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://kelimelle.herokuapp.com/' + config.usr)
+    bot.set_webhook(url='https://kelimelle.herokuapp.com/' + info.usr)
     return "!", 200
 
 
