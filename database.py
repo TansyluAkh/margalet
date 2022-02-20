@@ -21,7 +21,6 @@ con = psycopg2.connect(
 class User():
     def __init__(self, chatid,letters, open, pos, r1, r2, r3, r4, r5 ):
         self.id = chatid
-        self.user = chatid
         self.letters = letters
         self.pos = pos
         self.open = open
